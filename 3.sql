@@ -1,3 +1,3 @@
-SELECT SUM(d.salary) FROM developers d, skills s, developer_skills ds WHERE s.branch = 'Java'
-															AND d.developer_id = ds.developer_id
-															AND s.skill_id = ds.skill_id;
+SELECT SUM(d.salary) FROM developers d WHERE developer_id IN
+                            (SELECT developer_id FROM developer_skills WHERE skill_id IN
+                            (SELECT s.skill_id FROM skills s WHERE branch = 'Java'));
